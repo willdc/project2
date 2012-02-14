@@ -98,7 +98,7 @@ function drawscreen1($connection)
 print "<h2>Starter Kit for DIG4104c Project 2</h2>";
 
 // First, open the Database
-
+/*
 if ($onmac)
 {
     $connection=mysql_connect("localhost","student","student")
@@ -108,13 +108,13 @@ if ($onmac)
 		or print "select failed because ".mysql_error();
 }
 else // on sulley. Use your own dbname, dbuser and dbpassword
-{
-    $connection=mysql_connect("localhost","dbuser","dbpassword")
+{ */
+    $connection=mysql_connect("localhost","wi577016","willdc")
 		or print "connect failed because ".mysql_error();  
 		
-    mysql_select_db("dbname",$connection) // all projects are in ONE db
+    mysql_select_db("wi577016",$connection) // all projects are in ONE db
 		or print "select failed because ".mysql_error();
-}
+//}
 
 	//////// THE MAIN ACTION /////////////
 
