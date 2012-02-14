@@ -16,7 +16,7 @@
 // Added from ucflead(Mac) at 10:07 AM
 
 $Testnumber=4;
-$onmac=1; // set this to 0 if running on Sulley
+$onmac=0; // set this to 0 if running on Sulley
 
 function logprint($what,$when)
 {global $Testnumber;
@@ -89,6 +89,9 @@ function drawscreen1($connection)
 	print "<p><input name='name' type='text'> Please enter your name</p>";
 	print "<p><input name='action' type='submit' value='Submit'>";
 	print "<p><input name='action' type='submit' value='Clear History'>";
+	print "<p><input name='action' type='submit' value='Vote 1'>";
+	print "<p><input name='action' type='submit' value='Vote 2'>";
+	print "<p><input name='action' type='submit' value='Vote 3'>";
 }
 ///////// MAIN //////////////
 
@@ -139,6 +142,18 @@ else // on sulley. Use your own dbname, dbuser and dbpassword
 	{	
 		erasehistory($connection);
 		print "History was cleared";
+	}
+	else if ($action=='Vote 1')
+	{
+		
+	}
+	else if ($action=='Vote 2')
+	{
+		
+	}
+	else if ($action=='Vote 3')
+	{
+		
 	}
 	else if ($action) // ignore null, as it's probably your first visit. 
 		print "What shall I do with action=$action?";
