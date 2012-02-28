@@ -118,10 +118,10 @@ else // on sulley. Use your own dbname, dbuser and dbpassword
 
 	//////// THE MAIN ACTION /////////////
 
-	$action=$_POST['action'];
+	
 	$idnumber=$_POST['idnumber'];
 	$name=$_POST['name'];
-		
+		$action=$_POST['action'];
 	if ($action=='Submit')
 	{
 		if (!$idnumber)
@@ -129,13 +129,16 @@ else // on sulley. Use your own dbname, dbuser and dbpassword
 		else
 		{
 			$maybename=checkperson($connection, $idnumber);
-			if ($maybename)
-				print "<p>This number ($idnumber) is already in the database, ".
-						"and belongs to $maybename.</p>";
-			else if ($name)
-				storeperson($connection, $idnumber, $name);
+			if ($maybename == $name)
+			{
+				print "<p>You are logged in!</p>";
+				
+			}			
 			else
-				print "<p>This number ($idnumber) is not in the database.";
+			{
+				//storeperson($connection, $idnumber, $name);
+				
+			}
 		} # idnumber block
 	}
 	else if ($action=='Clear History') 
