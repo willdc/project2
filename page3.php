@@ -37,22 +37,6 @@ function makeHeader() {
 					$canvote = 1;
 				}
 			}
-		
-	
-	if ($action=='Vote for Buzz!')
-	{
-		$newvotes = 0;
-		$selectQuery = "SELECT * FROM votes where candidate='buzz' ";
-		$result = $mysqli->query($selectQuery);
-			while($row = $result->fetch_object()) 
-		{
-			$newvotes = $row->total + 1;
-		}
-		$selectQuery = "UPDATE votes SET total='$newvotes' where candidate='buzz' ";
-		$result = $mysqli->query($selectQuery);
-		$selectQuery = "UPDATE people SET voted='1' where name='$name' ";
-		$result = $mysqli->query($selectQuery);
-	}
 	}
 	
 	$totalQuery = "SELECT * FROM votes";
@@ -83,7 +67,7 @@ function makeHeader() {
 							';
 					}
 					else if ($result = $mysqli->query("SELECT * FROM people WHERE idnumber='$idnumber' AND name='$name'")) {
-								while($row=$result->fetch_object()){
+								while($row=$result->fetch_object()){//LOGGED IN HASNT VOTED
 									if($row->voted == 0){
 											
 										print '
@@ -103,14 +87,14 @@ function makeHeader() {
 													<img src="images/Buzz.jpg" />
 													<p>Thank you for logging in <i>'.$name.'</i>.</p>
 													<form method="post" action="project2v2.php">
-														<input name="idnumber" type="text" style="display:none" value=".$idnumber.">
-														<input name="name" type="text" style="display:none" value=".$name.">
+														<input name="idnumber" type="text" style="display:none" value="'.$idnumber.'">
+														<input name="name" type="text" style="display:none" value="'.$name.'">
 														<input name="action" type="submit" data-ajax="false" value="Vote for Buzz!">
 													</form>
 													<br />
 											';
 									}
-									else if($row->voted == 1){
+									else if($row->voted == 1){//LOGGED IN ALREADY VOTED
 										print '
 											</head> 
 											<body> 
@@ -166,7 +150,7 @@ print '<div data-role="controlgroup">
 				
 			</div>	
 			<div data-role="footer">
-				<h4>Porky Pig</h4>
+				<h4>Buzz Lightyear</h4>
 			</div><!-- /footer -->
 </div>
 </body>

@@ -103,7 +103,7 @@ function makeHeader() {
 	 				
 //HOME PAGE
 				
-					if (!$_POST['idnumber'] || !$_POST['name']){//NOT LOGGED IN
+					if (!$idnumber || !$name){//NOT LOGGED IN
 						print '
 							</head> 
 							<body> 
@@ -128,7 +128,7 @@ function makeHeader() {
 							';
 					}
 					else if ($result = $mysqli->query("SELECT * FROM people WHERE idnumber='$idnumber' AND name='$name'")) {
-								while($row=$result->fetch_object()){
+								while($row=$result->fetch_object()){//LOGGED IN HASNT VOTED
 									if($row->voted == 0){
 											
 										print '
@@ -148,7 +148,7 @@ function makeHeader() {
 											<br />
 											';
 									}
-									else if($row->voted == 1){
+									else if($row->voted == 1){//LOGGED IN ALREADY VOTED
 										print '
 											</head> 
 											<body> 

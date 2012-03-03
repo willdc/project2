@@ -39,22 +39,6 @@ function makeHeader() {
 					$canvote = 1;
 				}
 			}
-		
-	
-	if ($action=='Vote for Porky!')
-	{
-		$newvotes = 0;
-		$selectQuery = "SELECT * FROM votes where candidate='porky' ";
-		$result = $mysqli->query($selectQuery);
-			while($row = $result->fetch_object()) 
-		{
-			$newvotes = $row->total + 1;
-		}
-		$selectQuery = "UPDATE votes SET total='$newvotes' where candidate='porky' ";
-		$result = $mysqli->query($selectQuery);
-		$selectQuery = "UPDATE people SET voted='1' where name='$name' ";
-		$result = $mysqli->query($selectQuery);
-	}
 	}
 	
 	$totalQuery = "SELECT * FROM votes";
@@ -85,7 +69,7 @@ function makeHeader() {
 							';
 					}
 					else if ($result = $mysqli->query("SELECT * FROM people WHERE idnumber='$idnumber' AND name='$name'")) {
-								while($row=$result->fetch_object()){
+								while($row=$result->fetch_object()){//LOGGED IN HASNT VOTED
 									if($row->voted == 0){
 											
 										print '
@@ -105,14 +89,14 @@ function makeHeader() {
 													<img src="images/Porky.jpg" />
 													<p>Thank you for logging in <i>'.$name.'</i>.</p>
 													<form method="post" action="project2v2.php">
-														<input name="idnumber" type="text" style="display:none" value=".$idnumber.">
-														<input name="name" type="text" style="display:none" value=".$name.">
+														<input name="idnumber" type="text" style="display:none" value="'.$idnumber.'">
+														<input name="name" type="text" style="display:none" value="'.$name.'">
 														<input name="action" type="submit" data-ajax="false" value="Vote for Porky!">
 													</form>
 													<br />
 											';
 									}
-									else if($row->voted == 1){
+									else if($row->voted == 1){//LOGGED IN ALREADY VOTED
 										print '
 											</head> 
 											<body> 
@@ -158,53 +142,10 @@ print '<div data-role="controlgroup">
 
 
 ?>
-
-			
-                
-                <!--<div data-role="controlgroup">
-                	<ul data-role="listview" data-dividertheme="a">
-               	 		<li data-role="list-divider"><h4>View the Other Candidates</h4></li>
-                        <a href="page3.php?idnumber=".$idnumber."&name=".$name."\" data-role="button" data-inline="false" data-mini="true" data-ajax="false" data-icon="arrow-r" data-iconpos="right">Buzz Lightyear</a>
-                        <a href="page4.php?idnumber=".$idnumber."&name=".$name."\" data-role="button" data-inline="false" data-mini="true" data-ajax="false" data-icon="arrow-r" data-iconpos="right">Johnny Bravo</a></ul>
-                  </div>      -->
-                	
-                
-				
-			</div>	
-			<div data-role="footer">
-				<h4>Porky Pig</h4>
-			</div><!-- /footer -->
+</div>	
+	<div data-role="footer">
+			<h4>Porky Pig</h4>
+	</div><!-- /footer -->
 </div>
 </body>
-</html>    
-				
-					
-					<!--print "Logged in as: ".$resultname."";
-					if ($canvote == 1)
-					{
-						print "<form method='post' action='project2v2.php'>";
-						print "<p><input name='idnumber' type='text' style='display:none' value='".$idnumber."'> </p>";
-						print "<p><input name='name' type='text' style='display:none' value='".$name."'> </p>";
-						print "<p><input name='action' type='submit' data-ajax=\"false\" value='Vote for Porky'></p>";
-						print "</form>";
-					}
-					else
-					{
-						print "<p>You have already voted and cannot vote again.";
-					}
-					while($row = $totalresult->fetch_object()) 
-					{
-						if ($row->candidate == "porky")
-						
-						{
-						print "<p>Votes for Porky Pig: ".$row->total."!";
-						}
-						
-					}
-					
-					print "	<p><a href=\"page2.php?idnumber=".$idnumber."&name=".$name."\" data-role=\"button\" data-inline='true' data-ajax=\"false\">Look at Porky Pig's Page</a></p>";
-					
-					print "	<p><a href=\"page3.php?idnumber=".$idnumber."&name=".$name."\" data-role=\"button\" data-inline='true' data-ajax=\"false\">Look at Buzz Lightyear's Page</a></p>";
-					
-					print "	<p><a href=\"page4.php?idnumber=".$idnumber."&name=".$name."\" data-role=\"button\" data-inline='true' data-ajax=\"false\">Look at Johnny Bravo's Page</a></p>";
-					print "	<p><a href=\"project2v2.php\" data-role=\"button\" data-inline='true' data-ajax=\"false\">Go to Sign In Page</a></p>";-->
+</html>
